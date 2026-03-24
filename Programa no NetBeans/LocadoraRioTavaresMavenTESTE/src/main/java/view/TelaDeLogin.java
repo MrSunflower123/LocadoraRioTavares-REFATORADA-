@@ -256,34 +256,9 @@ public class TelaDeLogin extends javax.swing.JFrame {
         String usuarioLogado = user.getTipoUsuario();
         String nome = user.getNomeUsuario();
         
-        // Determina que tipo usuário está tentando se conectar
-        switch (usuarioLogado){
-            
-            case "Gerente":
-            ConectarBD.criarConexao("Gerente", "54321");
-            break;
-            
-            case "Atendente":
-            ConectarBD.criarConexao("Atendente", "12345");
-            break;
-            
-            case "Supervisor":
-            ConectarBD.criarConexao("Supervisor", "56789");
-            break;
-            
-            case "Estoquista":
-            ConectarBD.criarConexao("Estoquista", "98765");
-            break;
-
-        default:
-            // Conecta como um usuário root por padrão
-            ConectarBD.criarConexao("root", "gui2004");
-            break;
-        }
-        
-        JOptionPane.showMessageDialog(null, "Olá, " + nome + ", seu tipo de usuário é: " + usuarioLogado +
-                                      ". Seja bem-vindo!" );
+        AutenticarLogin.verificarTipo(user, usuarioLogado, nome);
     }
+    
     
     /**
      * Impede que seja aceito campos vazios
