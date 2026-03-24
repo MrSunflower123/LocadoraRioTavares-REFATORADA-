@@ -1,9 +1,9 @@
 package view;
 
-import dao.UsuarioDAO;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import utilidades.AutenticarLogin;
 import utilidades.ConectarBD;
 import utilidades.GuardarUsuario;
 
@@ -236,26 +236,15 @@ public class TelaDeLogin extends javax.swing.JFrame {
     
     
     /**
-     * Verifica se os dados do usuário existem na base de dados
+     * Verifica se o usuário que está tentando logar existe na base de dados
      */
     protected void autenticarUsuario (){
-        UsuarioDAO dao = new UsuarioDAO();
         
         String usuarioDigitado = txtNomeUsuario.getText();
         String senhaDigitada = txtSenha.getText();
         String tipoUsuario = cbxTipoUsuario.getSelectedItem().toString();
         
-        Usuario usuario = dao.autenticar(usuarioDigitado, senhaDigitada, tipoUsuario);
-        
-        // Se retornar null, o DAO já mostrou a mensagem
-        if (usuario == null) {
-        return;
-        }
-        
-        else {
-        // Guarda o usuário logado em uma variável global
-        GuardarUsuario.setUsuario(usuario);
-        }
+        AutenticarLogin.autenticarUsuario(usuarioDigitado, senhaDigitada, tipoUsuario);  
     }
     
     /**

@@ -80,6 +80,7 @@ view\BuscaEmprestimo$1.class
 view\BuscaUsuario$3.class
 view\MenuPrincipal$3.class
 view\BuscaEmprestimo.class
+utilidades\AutenticarLogin.class
 view\CadastroEmprestimo$2.class
 view\MenuPrincipal$9.class
 utilidades\ClienteCallback.class
