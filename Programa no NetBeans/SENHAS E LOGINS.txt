@@ -1,0 +1,25 @@
+SENHAS e NOMES para poder entrar no programa:
+
+GERENTE
+
+LOGIN: GERENTE
+SENHA: Geren123
+TIPO: Gerente
+
+ATENDENTE
+
+LOGIN: ATENDENTE
+SENHA: Aten123
+TIPO: Atendente
+
+ESTOQUISTA
+
+LOGIN: ESTOQUISTA
+SENHA: Esto123
+TIPO: Estoquista
+
+SUPERVISOR
+
+LOGIN: SUPERVISOR
+SENHA: Super123
+TIPO: Supervisor
