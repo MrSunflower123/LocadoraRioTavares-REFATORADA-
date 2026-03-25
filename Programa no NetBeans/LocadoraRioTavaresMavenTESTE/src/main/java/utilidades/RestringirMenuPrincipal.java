@@ -18,6 +18,7 @@ import model.Usuario;
 public class RestringirMenuPrincipal {
     
     // Método vai restringir o acesso do Atendente ao botões do menu principal
+    
     public static void restringirAtendente(JComboBox<String> cbxUsuarios, JComboBox<String> cbxJogos){
         
         Usuario user = GuardarUsuario.getUsuario();
@@ -35,6 +36,31 @@ public class RestringirMenuPrincipal {
             }
         
     }
+    
+     // Método vai restringir o acesso do Estoquista ao botões do menu principal
+    
+     public static void restringirEstoquista(JComboBox<String> cbxUsuarios, JComboBox<String> cbxClientes,
+                                            JComboBox<String> cbxEmprestimos, JComboBox<String> cbxBackups){
+        
+        Usuario user = GuardarUsuario.getUsuario();
+        
+        String usuarioLogado = user.getTipoUsuario();
+        
+            if (usuarioLogado.equals("Estoquista")) {
+
+                cbxUsuarios.setEnabled(false);
+
+                cbxEmprestimos.setEnabled(false);
+                
+                cbxClientes.setEnabled(false);
+                
+                cbxBackups.setEnabled(false);
+                
+                JOptionPane.showMessageDialog(null, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
+                                                      + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
+            }
+    }
+     
     
     /**
      * Desabilita botões do sistema, de acordo com o tipo de usuário que está conectado

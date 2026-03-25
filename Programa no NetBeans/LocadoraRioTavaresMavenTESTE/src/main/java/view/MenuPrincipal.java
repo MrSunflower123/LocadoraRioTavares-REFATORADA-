@@ -448,6 +448,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     protected void verificarUsuario(){
     
         RestringirMenuPrincipal.restringirAtendente(cbxUsuarios, cbxJogos);
+        
+        RestringirMenuPrincipal.restringirEstoquista(cbxUsuarios, cbxClientes, cbxEmprestimos, cbxBackups);
     }
 
 
