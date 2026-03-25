@@ -1,6 +1,7 @@
 model\Emprestimo.class
 view\TelaDeLogin.class
 dao\JogoDAO.class
+utilidades\RestringirMenuPrincipal$1.class
 view\EmprestimoVinculado$1.class
 view\PerfilEmprestimo$1.class
 utilidades\ConectarBD.class
@@ -43,11 +44,11 @@ view\PerfilCliente$5.class
 view\MenuPrincipal$1.class
 view\PerfilJogo$1.class
 view\ListaSecundariaCliente$2.class
-view\MenuPrincipal$10.class
 view\PerfilJogo$3.class
 view\PerfilUsuario$1.class
 view\CadastroEmprestimo$5.class
 dao\EmprestimoDAO.class
+utilidades\RestringirMenuPrincipal.class
 view\CadastroUsuario$2.class
 view\PerfilEmprestimo$3.class
 model\Jogo.class

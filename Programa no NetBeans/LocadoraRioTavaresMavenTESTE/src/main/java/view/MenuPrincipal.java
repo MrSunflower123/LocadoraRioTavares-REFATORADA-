@@ -8,6 +8,7 @@ import java.util.Set;
 import model.Usuario;
 import utilidades.GuardarUsuario;
 import utilidades.BackupUtil;
+import utilidades.RestringirMenuPrincipal;
 
 
 /**
@@ -442,84 +443,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //Métodos usados
     
     /**
-     * Vai restringir o acesso aos botãos, dependendo do tipo de usuário
+     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
      */ 
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
-        
-        switch (usuarioLogado){
-            case "Atendente": //Atendente
-                
-                cbxUsuarios.setEnabled(false);
-                desabilitarOpcoes(cbxJogos, Set.of(1));
-                JOptionPane.showMessageDialog(this, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                  + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
-            break;
-            
-            case "Estoquista":
-                
-               cbxClientes.setEnabled(false);
-               cbxEmprestimos.setEnabled(false);
-               cbxUsuarios.setEnabled(false);
-               cbxBackups.setEnabled(false);
-               JOptionPane.showMessageDialog(this, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                  + "Para mudar isso, escolha o tipo de usuário (Gerente).");
-               break;
-               
-            
-            case "Gerente":
-               break;
-            
-               
-            case "Supervisor":
-                
-                cbxUsuarios.setEnabled(false);
-                cbxBackups.setEnabled(false);
-                desabilitarOpcoes(cbxEmprestimos, Set.of(1)); // desabilita "Cadastrar emprestimos"
-                desabilitarOpcoes(cbxJogos, Set.of(1));    // desabilita "Cadastrar jogo"
-                desabilitarOpcoes(cbxClientes, Set.of(1)); // desabilita "Cadastrar cliente"
-                JOptionPane.showMessageDialog(this, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                  + "Para mudar isso, escolha o tipo de usuário (Gerente).");
-                
-               break;
-        }
+    
+        RestringirMenuPrincipal.restringirAtendente(cbxUsuarios, cbxJogos);
     }
-
-    
-
-    /**
-     * Desabilita botões do sistema, de acordo com o tipo de usuário que está conectado
-     * @param comboBox
-     * @param indicesDesabilitados
-     */ 
-    protected void desabilitarOpcoes(JComboBox<String> comboBox, Set<Integer> indicesDesabilitados) {
-    
-    // Customiza o renderizador para mostrar itens desabilitados, mas apenas visualmente
-    comboBox.setRenderer(new DefaultListCellRenderer() {
-        @Override
-        public Component getListCellRendererComponent(
-                JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if (indicesDesabilitados.contains(index)) {
-                component.setEnabled(false); 
-                component.setForeground(Color.GRAY); 
-            } else {
-                component.setEnabled(true);
-                component.setForeground(Color.BLACK);
-            }
-            return component;
-        }
-    });
-
-    // Impede a seleção de opções desabilitadas
-    comboBox.addActionListener(e -> {
-        if (indicesDesabilitados.contains(comboBox.getSelectedIndex())) {
-            JOptionPane.showMessageDialog(comboBox, "Acesso Negado a esta opção.");
-            comboBox.setSelectedIndex(0); // volta para "Selecione"
-        }
-    });
-}
 
 
     /**
