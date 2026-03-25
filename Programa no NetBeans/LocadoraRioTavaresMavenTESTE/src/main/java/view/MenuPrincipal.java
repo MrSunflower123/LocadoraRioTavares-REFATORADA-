@@ -500,15 +500,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         @Override
         public Component getListCellRendererComponent(
                 JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             if (indicesDesabilitados.contains(index)) {
-                c.setEnabled(false); 
-                c.setForeground(Color.GRAY); 
+                component.setEnabled(false); 
+                component.setForeground(Color.GRAY); 
             } else {
-                c.setEnabled(true);
-                c.setForeground(Color.BLACK);
+                component.setEnabled(true);
+                component.setForeground(Color.BLACK);
             }
-            return c;
+            return component;
         }
     });
 
