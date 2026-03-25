@@ -450,6 +450,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         RestringirMenuPrincipal.restringirAtendente(cbxUsuarios, cbxJogos);
         
         RestringirMenuPrincipal.restringirEstoquista(cbxUsuarios, cbxClientes, cbxEmprestimos, cbxBackups);
+        
+        RestringirMenuPrincipal.restringirSupervisor(cbxUsuarios, cbxClientes, cbxEmprestimos, cbxBackups, cbxJogos);
     }
 
 

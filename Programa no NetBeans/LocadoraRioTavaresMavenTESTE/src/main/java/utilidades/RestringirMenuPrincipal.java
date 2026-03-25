@@ -61,6 +61,37 @@ public class RestringirMenuPrincipal {
             }
     }
      
+     
+     // Método vai restringir o acesso do Supervisor ao botões do menu principal
+     
+     public static void restringirSupervisor(JComboBox<String> cbxUsuarios, JComboBox<String> cbxClientes,
+                                            JComboBox<String> cbxEmprestimos, JComboBox<String> cbxBackups,
+                                            JComboBox<String> cbxJogos){
+        
+        Usuario user = GuardarUsuario.getUsuario();
+        
+        String usuarioLogado = user.getTipoUsuario();
+        
+            if (usuarioLogado.equals("Supervisor")) {
+
+                cbxUsuarios.setEnabled(false);
+                
+                cbxBackups.setEnabled(false);
+                
+                desabilitarOpcoes(cbxEmprestimos, Set.of(1)); // desabilita "Cadastrar emprestimos"
+                
+                desabilitarOpcoes(cbxJogos, Set.of(1));    // desabilita "Cadastrar jogo"
+                
+                desabilitarOpcoes(cbxClientes, Set.of(1)); // desabilita "Cadastrar cliente"
+                
+                JOptionPane.showMessageDialog(null, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
+                                                      + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
+            }
+    }
+     
+     
+     
+     
     
     /**
      * Desabilita botões do sistema, de acordo com o tipo de usuário que está conectado
