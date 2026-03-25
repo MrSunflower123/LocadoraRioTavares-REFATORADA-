@@ -30,9 +30,9 @@ public class RestringirMenuPrincipal {
                 cbxUsuarios.setEnabled(false);
 
                 desabilitarOpcoes(cbxJogos, Set.of(1));
-
-                JOptionPane.showMessageDialog(null, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                      + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
+            
+                mostrarMensagem();
+                
             }
         
     }
@@ -56,9 +56,9 @@ public class RestringirMenuPrincipal {
                 
                 cbxBackups.setEnabled(false);
                 
-                JOptionPane.showMessageDialog(null, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                      + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
-            }
+                mostrarMensagem();
+                
+            } 
     }
      
      
@@ -84,14 +84,12 @@ public class RestringirMenuPrincipal {
                 
                 desabilitarOpcoes(cbxClientes, Set.of(1)); // desabilita "Cadastrar cliente"
                 
-                JOptionPane.showMessageDialog(null, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                      + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
+                mostrarMensagem();
+                
             }
     }
      
-     
-     
-     
+      
     
     /**
      * Desabilita botões do sistema, de acordo com o tipo de usuário que está conectado
@@ -125,4 +123,18 @@ public class RestringirMenuPrincipal {
             }
         });
     }
+     
+     
+        // Mostra uma mensagem caso o acesso do usuário seja restringido
+     
+        public static void mostrarMensagem() {
+             
+        JOptionPane.showMessageDialog(
+            null,
+            "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n"
+          + "Para mudar isso, escolha o tipo de usuário (Gerente)."
+        );
+        
+    }
+     
 }
