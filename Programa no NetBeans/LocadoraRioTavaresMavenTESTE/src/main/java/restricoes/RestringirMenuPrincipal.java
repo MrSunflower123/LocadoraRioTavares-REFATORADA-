@@ -46,9 +46,9 @@ public class RestringirMenuPrincipal {
         
         Usuario user = GuardarUsuario.getUsuario();
         
-        String usuarioLogado = (user.getTipoUsuario());;
+        TipoUsuarioEnum usuarioLogado = TipoUsuarioEnum.valueOf(user.getTipoUsuario().toUpperCase());
         
-            if (usuarioLogado.equals("Estoquista")) {
+            if (usuarioLogado == TipoUsuarioEnum.ESTOQUISTA) {
 
                 cbxUsuarios.setEnabled(false);
 
@@ -72,9 +72,9 @@ public class RestringirMenuPrincipal {
         
         Usuario user = GuardarUsuario.getUsuario();
         
-        String usuarioLogado = user.getTipoUsuario();
+        TipoUsuarioEnum usuarioLogado = TipoUsuarioEnum.valueOf(user.getTipoUsuario().toUpperCase());
         
-            if (usuarioLogado.equals("Supervisor")) {
+            if (usuarioLogado == TipoUsuarioEnum.SUPERVISOR) {
 
                 cbxUsuarios.setEnabled(false);
                 
