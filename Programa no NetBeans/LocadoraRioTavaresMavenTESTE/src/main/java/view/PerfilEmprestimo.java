@@ -6,8 +6,7 @@ import java.time.LocalDate;
 import model.Emprestimo;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import utilidades.GuardarUsuario;
+import restricoes.RestringirPerfilEmprestimo;
 
 /**
  * JFrame mostra o perfil do emprestimo
@@ -416,32 +415,11 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
     
     
     /**
-     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
+     * Limita os botões que o Supervisor pode acessar
      */ 
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
         
-        switch (usuarioLogado){
-            case "Atendente":
-                 //Sem restrições
-            break;
-            
-            case "Estoquista":
-               //Nem chega nesta tela
-               break;
-               
-            case "Gerente":
-                //Sem restrições
-               break;
-            
-               
-            case "Supervisor": 
-                 btnConfirmar.setEnabled(false);
-                 btnEditar.setEnabled(false);
-                 btnExcluir.setEnabled(false);
-               break;
-        }
+        RestringirPerfilEmprestimo.restringirSupervisor(btnConfirmar, btnEditar, btnExcluir);
     }
 
     
