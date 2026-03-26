@@ -52,6 +52,7 @@ dao\EmprestimoDAO.class
 view\CadastroUsuario$2.class
 view\PerfilEmprestimo$3.class
 model\Jogo.class
+restricoes\RestringirPerfilJogo.class
 view\BuscaEmprestimo$2.class
 view\PerfilEmprestimo.class
 view\MenuPrincipal$2.class

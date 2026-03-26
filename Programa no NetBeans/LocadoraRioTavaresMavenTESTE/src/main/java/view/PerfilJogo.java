@@ -4,8 +4,7 @@ import dao.JogoDAO;
 import java.awt.event.KeyEvent;
 import model.Jogo;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import utilidades.GuardarUsuario;
+import restricoes.RestringirPerfilJogo;
 
 public class PerfilJogo extends javax.swing.JFrame {
     
@@ -439,34 +438,13 @@ public class PerfilJogo extends javax.swing.JFrame {
 
     
     /**
-     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
-     */ 
+     * Limita os botões que o Supervisor e o Atendente podem acessar
+     */
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
         
-        switch (usuarioLogado){
-            case "Atendente":
-               btnConfirmar.setEnabled(false);
-               btnEditar.setEnabled(false);
-               btnExcluir.setEnabled(false);
-            break;
-            
-            case "Estoquista":
-               //Sem restrições
-               break;
-               
-            case "Gerente":
-                //Sem restrições
-               break;
-            
-               
-            case "Supervisor": 
-                 btnConfirmar.setEnabled(false);
-                 btnEditar.setEnabled(false);
-                 btnExcluir.setEnabled(false);
-               break;
-        }
+       RestringirPerfilJogo.restringirSupervisor(btnConfirmar, btnEditar, btnExcluir);
+       
+       RestringirPerfilJogo.restringirAtendente(btnConfirmar, btnEditar, btnExcluir);
     }
     
     
