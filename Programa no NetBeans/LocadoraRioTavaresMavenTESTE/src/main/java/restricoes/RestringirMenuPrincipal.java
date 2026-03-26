@@ -1,5 +1,5 @@
 
-package utilidades;
+package restricoes;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import utilidades.GuardarUsuario;
 
 
 /**

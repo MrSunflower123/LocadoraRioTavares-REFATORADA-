@@ -1,7 +1,6 @@
 model\Emprestimo.class
 view\TelaDeLogin.class
 dao\JogoDAO.class
-utilidades\RestringirMenuPrincipal$1.class
 view\EmprestimoVinculado$1.class
 view\PerfilEmprestimo$1.class
 utilidades\ConectarBD.class
@@ -34,6 +33,7 @@ dao\JPAUtil.class
 view\EmprestimoVinculado.class
 view\CadastroEmprestimo.class
 view\PerfilUsuario$4.class
+restricoes\RestringirMenuPrincipal.class
 view\CadastroJogo$2.class
 view\BuscaCliente$3.class
 view\BuscaUsuario$2.class
@@ -48,7 +48,6 @@ view\PerfilJogo$3.class
 view\PerfilUsuario$1.class
 view\CadastroEmprestimo$5.class
 dao\EmprestimoDAO.class
-utilidades\RestringirMenuPrincipal.class
 view\CadastroUsuario$2.class
 view\PerfilEmprestimo$3.class
 model\Jogo.class
@@ -69,6 +68,7 @@ view\BuscaUsuario$1.class
 view\MenuPrincipal$5.class
 view\PerfilUsuario.class
 view\PerfilCliente.class
+restricoes\RestringirMenuPrincipal$1.class
 utilidades\BackupUtil.class
 view\BuscaCliente$1.class
 view\BuscaCliente.class

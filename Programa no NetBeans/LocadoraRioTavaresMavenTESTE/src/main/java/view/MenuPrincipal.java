@@ -8,7 +8,7 @@ import java.util.Set;
 import model.Usuario;
 import utilidades.GuardarUsuario;
 import utilidades.BackupUtil;
-import utilidades.RestringirMenuPrincipal;
+import restricoes.RestringirMenuPrincipal;
 
 
 /**
