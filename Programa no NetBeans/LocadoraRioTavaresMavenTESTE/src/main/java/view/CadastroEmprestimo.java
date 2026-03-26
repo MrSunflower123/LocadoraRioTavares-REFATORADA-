@@ -400,15 +400,6 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
 
 
     
-     //Metodo usado para pegar o titulo de um Jogo á partir da tabela de Jogos
-    protected void pegarDadosJogo() {
-    
-        
-    }
-
-    
-    
-    
     //Valida se os campos não estão vazios e no formato correto
     private void validarCampos() throws Exception {
         String nomeCliente = txtNomeCliente.getText();
