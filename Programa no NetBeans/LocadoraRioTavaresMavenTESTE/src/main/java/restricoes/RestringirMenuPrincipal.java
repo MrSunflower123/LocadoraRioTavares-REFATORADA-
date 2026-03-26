@@ -10,6 +10,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import utilidades.GuardarUsuario;
+import utilidades.TipoUsuarioEnum;
 
 
 /**
@@ -24,9 +25,9 @@ public class RestringirMenuPrincipal {
         
         Usuario user = GuardarUsuario.getUsuario();
         
-        String usuarioLogado = user.getTipoUsuario();
+        TipoUsuarioEnum usuarioLogado = TipoUsuarioEnum.valueOf(user.getTipoUsuario().toUpperCase());
         
-            if (usuarioLogado.equals("Atendente")) {
+            if (usuarioLogado == TipoUsuarioEnum.ATENDENTE) {
 
                 cbxUsuarios.setEnabled(false);
 
@@ -45,7 +46,7 @@ public class RestringirMenuPrincipal {
         
         Usuario user = GuardarUsuario.getUsuario();
         
-        String usuarioLogado = user.getTipoUsuario();
+        String usuarioLogado = (user.getTipoUsuario());;
         
             if (usuarioLogado.equals("Estoquista")) {
 

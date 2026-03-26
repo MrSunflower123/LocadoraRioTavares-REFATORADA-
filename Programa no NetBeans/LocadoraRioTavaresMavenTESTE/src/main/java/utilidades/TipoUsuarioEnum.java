@@ -8,5 +8,8 @@ package utilidades;
  * @author guise
  */
 public enum TipoUsuarioEnum {
-    
+        GERENTE,
+        ATENDENTE,
+        ESTOQUISTA,
+        SUPERVISOR
 }

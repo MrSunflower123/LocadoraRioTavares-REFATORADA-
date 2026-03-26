@@ -12,6 +12,7 @@ utilidades\GuardarUsuario.class
 view\BuscaUsuario.class
 view\CadastroEmprestimo$3.class
 view\PerfilCliente$4.class
+utilidades\TipoUsuarioEnum.class
 view\CadastroJogo$1.class
 view\ListaSecundariaJogo$1.class
 model\Cliente.class
@@ -80,6 +81,7 @@ view\PerfilEmprestimo$2.class
 view\BuscaEmprestimo$1.class
 view\BuscaUsuario$3.class
 view\MenuPrincipal$3.class
+restricoes\RestringirPerfilCliente.class
 view\BuscaEmprestimo.class
 utilidades\AutenticarLogin.class
 view\CadastroEmprestimo$2.class
