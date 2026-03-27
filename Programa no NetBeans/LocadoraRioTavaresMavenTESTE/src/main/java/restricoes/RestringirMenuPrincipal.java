@@ -17,7 +17,7 @@ import utilidades.TipoUsuarioEnum;
  * Classe que vai restringir o acesso dos usuários na tela MenuPrincipal
  * @author guise
  */
-public class RestringirMenuPrincipal {
+ public class RestringirMenuPrincipal {
     
     // Método vai restringir o acesso do Atendente ao botões do menu principal
     
