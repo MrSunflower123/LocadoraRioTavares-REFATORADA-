@@ -4,8 +4,7 @@ import dao.JogoDAO;
 import java.awt.event.KeyEvent;
 import model.Jogo;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import utilidades.GuardarUsuario;
+import restricoes.RestringirPerfilJogo;
 
 public class PerfilJogo extends javax.swing.JFrame {
     
@@ -375,11 +374,17 @@ public class PerfilJogo extends javax.swing.JFrame {
      * Preenche os campos automaticamente com os dados do jogo
      */
     protected void preencherCampos() {
+        
        txtTitulo.setText(jogoPassado.getTitulo());
+       
        txtGenero.setText(jogoPassado.getGenero());
+       
        txtPlataforma.setText(jogoPassado.getPlataforma());
+       
        txtLancamento.setText(String.valueOf(jogoPassado.getLancamento()));
+       
        txtDesenvolvedora.setText(jogoPassado.getDesenvolvedora());
+       
        txtCopias.setText(String.valueOf(jogoPassado.getCopias()));
 
         //Deixa os campos bloqueados inicialmente
@@ -396,16 +401,25 @@ public class PerfilJogo extends javax.swing.JFrame {
      * Edita os dados do jogo pelos que estão nos campos
      */
      protected void atualizarJogo(){
+         
          JogoDAO jogoDAO = new JogoDAO();
+         
          String titulo = txtTitulo.getText();
+         
          String genero = txtGenero.getText();
+         
          String plataforma = txtPlataforma.getText();
+         
          int lancamento = Integer.parseInt(txtLancamento.getText());
+         
          String desenvolvedora = txtDesenvolvedora.getText();
+         
          int copias = Integer.parseInt(txtCopias.getText());
+         
          
          jogoDAO.editar(jogoPassado, titulo, genero, plataforma, lancamento, desenvolvedora, copias);
         
+         
         JOptionPane.showMessageDialog(
             this,
             "Dados editados com sucesso!",
@@ -426,7 +440,9 @@ public class PerfilJogo extends javax.swing.JFrame {
      * Exclui o jogo da base de dados
      */
      protected void excluirJogo(){
+         
          JogoDAO jogoDAO = new JogoDAO();
+         
          jogoDAO.excluir(jogoPassado.getId());
          
          JOptionPane.showMessageDialog(
@@ -439,34 +455,13 @@ public class PerfilJogo extends javax.swing.JFrame {
 
     
     /**
-     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
-     */ 
+     * Limita os botões que o Supervisor e o Atendente podem acessar
+     */
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
         
-        switch (usuarioLogado){
-            case "Atendente":
-               btnConfirmar.setEnabled(false);
-               btnEditar.setEnabled(false);
-               btnExcluir.setEnabled(false);
-            break;
-            
-            case "Estoquista":
-               //Sem restrições
-               break;
-               
-            case "Gerente":
-                //Sem restrições
-               break;
-            
-               
-            case "Supervisor": 
-                 btnConfirmar.setEnabled(false);
-                 btnEditar.setEnabled(false);
-                 btnExcluir.setEnabled(false);
-               break;
-        }
+       RestringirPerfilJogo.restringirSupervisor(btnConfirmar, btnEditar, btnExcluir);
+       
+       RestringirPerfilJogo.restringirAtendente(btnConfirmar, btnEditar, btnExcluir);
     }
     
     
@@ -475,11 +470,17 @@ public class PerfilJogo extends javax.swing.JFrame {
      * @throws java.lang.Exception
      */ 
     protected void validarCampos() throws Exception {
+        
         String titulo = txtTitulo.getText();
+        
         String genero = txtGenero.getText();
+        
         String plataforma = txtPlataforma.getText();
+        
         String lancamentoTexto = txtLancamento.getText().trim();
+        
         String desenvolvedora = txtDesenvolvedora.getText();
+        
         String copiasTexto = txtCopias.getText();
         
         
@@ -596,4 +597,6 @@ public class PerfilJogo extends javax.swing.JFrame {
         btnVoltar.setMnemonic(KeyEvent.VK_V);
         
     }
+    
+    
 }

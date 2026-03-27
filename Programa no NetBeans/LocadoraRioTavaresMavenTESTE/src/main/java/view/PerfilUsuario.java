@@ -299,8 +299,11 @@ public class PerfilUsuario extends javax.swing.JFrame {
      * Preenche os campos automaticamente com os dados do usuario
      */
     protected void preencherCampos() {
+        
        txtNomeUsuario.setText(usuarioPassado.getNomeUsuario());
+       
        txtSenha.setText("********");
+       
        cbxTipoUsuario.setSelectedItem(usuarioPassado.getTipoUsuario());
        
        txtNomeUsuario.setEditable(false);
@@ -314,9 +317,13 @@ public class PerfilUsuario extends javax.swing.JFrame {
      * Criptografa a senha.
      */
      protected void atualizarUsuario(){
+         
          UsuarioDAO usuarioDAO = new UsuarioDAO();
+         
          String nome = txtNomeUsuario.getText();
+         
          String senha = txtSenha.getText();
+         
          String tipo = cbxTipoUsuario.getSelectedItem().toString();
          
          String senhaCripto = getMD5(senha);
@@ -342,7 +349,9 @@ public class PerfilUsuario extends javax.swing.JFrame {
      * Exclui o usuario da base de dados
      */
      protected void excluirUsuario(){
+         
          UsuarioDAO usuarioDAO = new UsuarioDAO();
+         
          usuarioDAO.excluir(usuarioPassado.getId());
          
          JOptionPane.showMessageDialog(
@@ -361,7 +370,9 @@ public class PerfilUsuario extends javax.swing.JFrame {
     protected void validarCampos() throws Exception {
         
         String nomeUsuario = txtNomeUsuario.getText();
+        
         String senha = txtSenha.getText();
+        
         String tipo = cbxTipoUsuario.getSelectedItem().toString();
         
         
@@ -406,4 +417,5 @@ public class PerfilUsuario extends javax.swing.JFrame {
         // Alt + V
         btnVoltar.setMnemonic(KeyEvent.VK_V);
     }
+    
 }

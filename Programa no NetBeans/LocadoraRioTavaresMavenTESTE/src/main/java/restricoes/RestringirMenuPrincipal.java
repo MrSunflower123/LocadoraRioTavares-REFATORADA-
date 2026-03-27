@@ -1,0 +1,153 @@
+
+package restricoes;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.util.Set;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import model.Usuario;
+import utilidades.GuardarUsuario;
+import utilidades.TipoUsuarioEnum;
+
+
+/**
+ * Classe que vai restringir o acesso dos usuários na tela MenuPrincipal
+ * @author guise
+ */
+ public class RestringirMenuPrincipal {
+    
+    // Método vai restringir o acesso do Atendente ao botões do menu principal
+    
+    public static void restringirAtendente(JComboBox<String> cbxUsuarios, JComboBox<String> cbxJogos){
+        
+        Usuario user = GuardarUsuario.getUsuario();
+        
+        TipoUsuarioEnum usuarioLogado = TipoUsuarioEnum.valueOf(user.getTipoUsuario().toUpperCase());
+        
+            if (usuarioLogado == TipoUsuarioEnum.ATENDENTE) {
+
+                cbxUsuarios.setEnabled(false);
+
+                desabilitarOpcoes(cbxJogos, Set.of(1));
+            
+                mostrarMensagem();
+                
+            }
+        
+    }
+    
+     // Método vai restringir o acesso do Estoquista ao botões do menu principal
+    
+     public static void restringirEstoquista(JComboBox<String> cbxUsuarios, JComboBox<String> cbxClientes,
+                                            JComboBox<String> cbxEmprestimos, JComboBox<String> cbxBackups){
+        
+        Usuario user = GuardarUsuario.getUsuario();
+        
+        TipoUsuarioEnum usuarioLogado = TipoUsuarioEnum.valueOf(user.getTipoUsuario().toUpperCase());
+        
+            if (usuarioLogado == TipoUsuarioEnum.ESTOQUISTA) {
+
+                cbxUsuarios.setEnabled(false);
+
+                cbxEmprestimos.setEnabled(false);
+                
+                cbxClientes.setEnabled(false);
+                
+                cbxBackups.setEnabled(false);
+                
+                mostrarMensagem();
+                
+            } 
+    }
+     
+     
+     // Método vai restringir o acesso do Supervisor ao botões do menu principal
+     
+     public static void restringirSupervisor(JComboBox<String> cbxUsuarios, JComboBox<String> cbxClientes,
+                                            JComboBox<String> cbxEmprestimos, JComboBox<String> cbxBackups,
+                                            JComboBox<String> cbxJogos){
+        
+        Usuario user = GuardarUsuario.getUsuario();
+        
+        TipoUsuarioEnum usuarioLogado = TipoUsuarioEnum.valueOf(user.getTipoUsuario().toUpperCase());
+        
+            if (usuarioLogado == TipoUsuarioEnum.SUPERVISOR) {
+
+                cbxUsuarios.setEnabled(false);
+                
+                cbxBackups.setEnabled(false);
+                
+                desabilitarOpcoes(cbxEmprestimos, Set.of(1)); // desabilita "Cadastrar emprestimos"
+                
+                desabilitarOpcoes(cbxJogos, Set.of(1));    // desabilita "Cadastrar jogo"
+                
+                desabilitarOpcoes(cbxClientes, Set.of(1)); // desabilita "Cadastrar cliente"
+                
+                mostrarMensagem();
+                
+            }
+    }
+     
+      
+    
+    /**
+     * Desabilita botões do sistema, de acordo com o tipo de usuário que está conectado
+     * @param comboBox
+     * @param indicesDesabilitados
+     */ 
+     protected static void desabilitarOpcoes(JComboBox<String> comboBox, Set<Integer> indicesDesabilitados) {
+    
+        // Customiza o renderizador para mostrar itens desabilitados, mas apenas visualmente
+        comboBox.setRenderer(new DefaultListCellRenderer() {
+            
+        @Override
+        public Component getListCellRendererComponent(
+                JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                
+                Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                
+                if (indicesDesabilitados.contains(index)) {
+                    component.setEnabled(false); 
+                    component.setForeground(Color.GRAY);
+                    
+                } else {
+                    
+                    component.setEnabled(true);
+                    component.setForeground(Color.BLACK);
+                    
+                }
+                
+                return component;
+            }
+        });
+
+        // Impede a seleção de opções desabilitadas
+        comboBox.addActionListener(e -> {
+            
+            if (indicesDesabilitados.contains(comboBox.getSelectedIndex())) {
+                
+                JOptionPane.showMessageDialog(comboBox, "Acesso Negado a esta opção.");
+                comboBox.setSelectedIndex(0); // volta para "Selecione"
+                
+            }
+            
+        });
+    }
+     
+     
+        // Mostra uma mensagem caso o acesso do usuário seja restringido
+     
+        public static void mostrarMensagem() {
+             
+        JOptionPane.showMessageDialog(
+            null,
+            "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n"
+          + "Para mudar isso, escolha o tipo de usuário (Gerente)."
+        );
+        
+    }
+     
+}

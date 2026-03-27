@@ -298,10 +298,15 @@ public class CadastroJogo extends javax.swing.JFrame {
         Jogo objJogo = new Jogo();
         
         String titulo = txtTitulo.getText();
+        
         String genero = txtGenero.getText();
+        
         String plataforma = txtPlataforma.getText();
+        
         int lancamento = Integer.parseInt(txtLancamento.getText());
+        
         String desenvolvedora = txtDesenvolvedora.getText();
+        
         int copias = Integer.parseInt(txtCopias.getText());
         
         
@@ -311,6 +316,7 @@ public class CadastroJogo extends javax.swing.JFrame {
         objJogo.setLancamento(lancamento);
         objJogo.setDesenvolvedora(desenvolvedora);
         objJogo.setCopias(copias);
+        
         
         JogoDAO jogoDAO = new JogoDAO();
         jogoDAO.inserir(objJogo);
@@ -331,11 +337,17 @@ public class CadastroJogo extends javax.swing.JFrame {
      * @throws java.lang.Exception
      */ 
         protected void validarCampos() throws Exception {
+            
             String titulo = txtTitulo.getText();
+            
             String genero = txtGenero.getText();
+            
             String plataforma = txtPlataforma.getText();
+            
             String lancamentoTexto = txtLancamento.getText().trim();
+            
             String desenvolvedora = txtDesenvolvedora.getText();
+            
             String copiasTexto = txtCopias.getText();
         
         
@@ -444,4 +456,6 @@ public class CadastroJogo extends javax.swing.JFrame {
         btnVoltar.setMnemonic(KeyEvent.VK_V);
         
     }
+    
+    
 }

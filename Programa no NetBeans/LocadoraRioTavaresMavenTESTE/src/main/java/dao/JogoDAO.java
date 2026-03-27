@@ -21,10 +21,14 @@ public class JogoDAO {
             EntityManager em = JPAUtil.getEntityManager();
 
             try{
+                
                 em.getTransaction().begin();
                 em.persist(jogo);
-                em.getTransaction().commit();           
-            } catch(Exception e) {
+                em.getTransaction().commit();
+                
+            } 
+            
+            catch(Exception e) {
                 em.getTransaction().rollback();
                 throw e;
             }
@@ -140,11 +144,17 @@ public class JogoDAO {
               Jogo j = em.find(Jogo.class, selecionado.getId());
               
               if (j != null){
+                  
                   j.setTitulo(titulo);
+                  
                   j.setGenero(genero);
+                  
                   j.setPlataforma(plataforma);
+                  
                   j.setLancamento(lancamento);
+                  
                   j.setDesenvolvedora(desenvolvedora);
+                  
                   j.setCopias(copias);
                   
                   em.merge(j);
@@ -152,6 +162,7 @@ public class JogoDAO {
               
               em.getTransaction().commit();
           }
+          
           catch (Exception e) {
           em.getTransaction().rollback();
           throw e;
@@ -160,6 +171,7 @@ public class JogoDAO {
           finally {
             JPAUtil.closeEntityManager(); 
           }
+          
       }
       
       
@@ -187,13 +199,16 @@ public class JogoDAO {
 
                 em.getTransaction().commit();
             }
+            
             catch (Exception e) {
                 em.getTransaction().rollback();
                 throw e;
             }
+            
             finally {
                 JPAUtil.closeEntityManager();
             }
+            
         }
     
 }

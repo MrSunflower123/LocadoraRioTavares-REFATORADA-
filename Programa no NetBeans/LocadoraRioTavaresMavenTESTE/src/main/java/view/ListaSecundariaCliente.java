@@ -219,15 +219,19 @@ public class ListaSecundariaCliente extends javax.swing.JFrame {
 
        
         for (Cliente c : lista) {
+            
             modelo.addRow(new Object[]{
+                
                 c.getId(),
                 c.getNome(),
                 c.getCpf(),
                 c.getBairro(),
                 c.getRua(),
                 c.getResidencial()
+                    
             });
         }
+        
     }
             
         
@@ -236,9 +240,13 @@ public class ListaSecundariaCliente extends javax.swing.JFrame {
      * Preenche tblClientes de acordo com o filtro selecionado
      */
      protected void aplicarFiltro(){
+         
          String texto = txtPesquisar.getText();
+         
          int filtro = cbxFiltros.getSelectedIndex();
+         
          ClienteDAO clienteDAO = new ClienteDAO();
+         
          List <Cliente> lista;
          
          if (texto.length() >= 1){

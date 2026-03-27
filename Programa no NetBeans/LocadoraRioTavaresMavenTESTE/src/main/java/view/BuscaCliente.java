@@ -22,13 +22,17 @@ public class BuscaCliente extends javax.swing.JFrame {
         mapearTeclas();
         
         ClienteDAO clienteDAO = new ClienteDAO();
+        
         List<Cliente> listaCliente = clienteDAO.listar();
+        
         preencherTabela(listaCliente);
         
            
         //Esconde a coluna de ID
         tblClientes.getColumnModel().getColumn(0).setMinWidth(0);
+        
         tblClientes.getColumnModel().getColumn(0).setMaxWidth(0);
+        
         tblClientes.getColumnModel().getColumn(0).setWidth(0);
         
         
@@ -246,12 +250,19 @@ public class BuscaCliente extends javax.swing.JFrame {
 
        
         for (Cliente c : lista) {
+            
             modelo.addRow(new Object[]{
+                
                 c.getId(),
+                
                 c.getNome(),
+                
                 c.getCpf(),
+                
                 c.getBairro(),
+                
                 c.getRua(),
+                
                 c.getResidencial()
             });
         }
@@ -263,9 +274,13 @@ public class BuscaCliente extends javax.swing.JFrame {
      * Preenche tblClientes de acordo com o filtro selecionado
      */
      protected void aplicarFiltro(){
+         
          String texto = txtPesquisar.getText();
+         
          int filtro = cbxFiltros.getSelectedIndex();
+         
          ClienteDAO clienteDAO = new ClienteDAO();
+         
          List <Cliente> lista;
          
          if (texto.length() >= 1){
@@ -286,6 +301,7 @@ public class BuscaCliente extends javax.swing.JFrame {
      * Abre o perfil do cliente selecionado com o mouse
      */ 
      protected void abrirPerfilCliente(){
+         
          int linha = tblClientes.getSelectedRow();
 
          if (linha == -1) {
@@ -293,18 +309,22 @@ public class BuscaCliente extends javax.swing.JFrame {
         }
         
          else{
+             
         // Coluna 0 contém a ID
          int idCliente = (int) tblClientes.getValueAt(linha, 0);
          
          ClienteDAO clienteDAO = new ClienteDAO();
+         
          Cliente clienteSelecionado = clienteDAO.buscarId(idCliente);
          
          PerfilCliente telaPerfil = new PerfilCliente(clienteSelecionado);
+         
          telaPerfil.setVisible(true);
          
          //Fecha esta tela
          dispose();
          }
+         
      }
      
      
@@ -322,5 +342,7 @@ public class BuscaCliente extends javax.swing.JFrame {
         
         // Alt + V
         btnVoltar.setMnemonic(KeyEvent.VK_V);    
-    }   
+    }
+    
+    
 }   

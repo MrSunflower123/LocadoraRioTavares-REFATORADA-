@@ -10,7 +10,6 @@ import jakarta.persistence.Persistence;
  * 
  */
 
-
 public class JPAUtil {
     
     /**
@@ -19,15 +18,19 @@ public class JPAUtil {
     private static final String PERSISTENCE_UNIT = "Locadora-PU";
     
     private static EntityManager em;
+    
     private static EntityManagerFactory fabrica;
     
     //Cria a a fabrica se estiver nula e a retorna
     public static EntityManager getEntityManager(){
+        
         if(fabrica == null || !fabrica.isOpen())
+            
             fabrica = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
         
         //Se EntityManager for nula ou não estiver aberta, crie um nova instância
-        if(em == null || !em.isOpen()) 
+        if(em == null || !em.isOpen())
+            
             em = fabrica.createEntityManager();
 
         return em;
@@ -38,7 +41,9 @@ public class JPAUtil {
      */
     public static void closeEntityManager(){
         if(em.isOpen() && em != null){
+            
             em.close();
+            
             fabrica.close();
         }
     

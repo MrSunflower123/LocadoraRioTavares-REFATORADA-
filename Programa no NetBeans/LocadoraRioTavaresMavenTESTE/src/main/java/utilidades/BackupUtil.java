@@ -130,6 +130,7 @@ public class BackupUtil {
         } finally {
             trocarConexao();
         }
+        
     }
 
     /**
@@ -213,7 +214,7 @@ public class BackupUtil {
                 ConectarBD.criarConexao("root", "gui2004");
                 break;
         }
-    }
         
-                   
+    }
+                         
 }

@@ -1,9 +1,9 @@
 package view;
 
-import dao.UsuarioDAO;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import utilidades.AutenticarLogin;
 import utilidades.ConectarBD;
 import utilidades.GuardarUsuario;
 
@@ -236,26 +236,17 @@ public class TelaDeLogin extends javax.swing.JFrame {
     
     
     /**
-     * Verifica se os dados do usuário existem na base de dados
+     * Verifica se o usuário que está tentando logar existe na base de dados
      */
     protected void autenticarUsuario (){
-        UsuarioDAO dao = new UsuarioDAO();
         
         String usuarioDigitado = txtNomeUsuario.getText();
+        
         String senhaDigitada = txtSenha.getText();
+        
         String tipoUsuario = cbxTipoUsuario.getSelectedItem().toString();
         
-        Usuario usuario = dao.autenticar(usuarioDigitado, senhaDigitada, tipoUsuario);
-        
-        // Se retornar null, o DAO já mostrou a mensagem
-        if (usuario == null) {
-        return;
-        }
-        
-        else {
-        // Guarda o usuário logado em uma variável global
-        GuardarUsuario.setUsuario(usuario);
-        }
+        AutenticarLogin.autenticarUsuario(usuarioDigitado, senhaDigitada, tipoUsuario);  
     }
     
     /**
@@ -263,38 +254,17 @@ public class TelaDeLogin extends javax.swing.JFrame {
      * 
      */
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
-        String nome = user.getNomeUsuario();
         
-        // Determina que tipo usuário está tentando se conectar
-        switch (usuarioLogado){
-            
-            case "Gerente":
-            ConectarBD.criarConexao("Gerente", "54321");
-            break;
-            
-            case "Atendente":
-            ConectarBD.criarConexao("Atendente", "12345");
-            break;
-            
-            case "Supervisor":
-            ConectarBD.criarConexao("Supervisor", "56789");
-            break;
-            
-            case "Estoquista":
-            ConectarBD.criarConexao("Estoquista", "98765");
-            break;
-
-        default:
-            // Conecta como um usuário root por padrão
-            ConectarBD.criarConexao("root", "gui2004");
-            break;
-        }
+        // Guarda em uma variável global
+        Usuario usuarioLogado = GuardarUsuario.getUsuario();
         
-        JOptionPane.showMessageDialog(null, "Olá, " + nome + ", seu tipo de usuário é: " + usuarioLogado +
-                                      ". Seja bem-vindo!" );
+        String tipoUsuario = usuarioLogado.getTipoUsuario();
+        
+        String nomeUsuario = usuarioLogado.getNomeUsuario();
+        
+        AutenticarLogin.verificarTipo(tipoUsuario, nomeUsuario);
     }
+    
     
     /**
      * Impede que seja aceito campos vazios
@@ -302,7 +272,9 @@ public class TelaDeLogin extends javax.swing.JFrame {
     protected void validarCampos() throws Exception {
         
         String nomeUsuario = txtNomeUsuario.getText();
+        
         String senha = txtSenha.getText();
+        
         String tipo = cbxTipoUsuario.getSelectedItem().toString();
         
         
@@ -339,4 +311,5 @@ public class TelaDeLogin extends javax.swing.JFrame {
         btnEntrar.setMnemonic(KeyEvent.VK_E);
         
     }
+    
 }

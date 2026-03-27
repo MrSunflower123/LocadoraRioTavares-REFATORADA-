@@ -19,7 +19,9 @@ public class BuscaUsuario extends javax.swing.JFrame {
         mapearTeclas();
         
         UsuarioDAO usuariosDAO = new UsuarioDAO();
+        
         List<Usuario> listaUsuario = usuariosDAO.listar();
+        
         preencherTabela(listaUsuario);
            
         //Esconde a coluna de ID
@@ -236,10 +238,15 @@ public class BuscaUsuario extends javax.swing.JFrame {
 
         
         for (Usuario u : lista) {
+            
             modelo.addRow(new Object[]{
+                
                 u.getId(),
+                
                 u.getNomeUsuario(),
+                
                 u.getSenha(),
+                
                 u.getTipoUsuario(),
             });
         }
@@ -250,9 +257,13 @@ public class BuscaUsuario extends javax.swing.JFrame {
          * Preenche tblUsuarios de acordo com o filtro selecionado
          */
          protected void aplicarFiltro(){
+             
              String texto = txtPesquisar.getText();
+             
              int filtro = cbxFiltros.getSelectedIndex();
+             
              UsuarioDAO usuarioDAO = new UsuarioDAO();
+             
              List <Usuario> lista;
          
          if (texto.length() >= 1){
@@ -273,6 +284,7 @@ public class BuscaUsuario extends javax.swing.JFrame {
          * Abre o perfil do usuario selecionado com o mouse
          */ 
          protected void abrirPerfilUsuario(){
+             
              int linha = tblUsuarios.getSelectedRow();
 
              if (linha == -1) {
@@ -280,13 +292,16 @@ public class BuscaUsuario extends javax.swing.JFrame {
             }
 
             else{
+                 
             // Coluna 0 contém a ID
              int idUsuario = (int) tblUsuarios.getValueAt(linha, 0);
 
              UsuarioDAO usuarioDAO = new UsuarioDAO();
+             
              Usuario usuarioSelecionado = usuarioDAO.buscarId(idUsuario);
 
              PerfilUsuario telaPerfil = new PerfilUsuario(usuarioSelecionado);
+             
              telaPerfil.setVisible(true);
              
              //Fecha esta tela
@@ -309,8 +324,7 @@ public class BuscaUsuario extends javax.swing.JFrame {
         
         // Alt + V
         btnVoltar.setMnemonic(KeyEvent.VK_V);        
-        
-        
-        
+           
     }
+    
 }

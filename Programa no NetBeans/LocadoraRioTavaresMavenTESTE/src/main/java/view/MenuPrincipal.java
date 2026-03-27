@@ -8,6 +8,7 @@ import java.util.Set;
 import model.Usuario;
 import utilidades.GuardarUsuario;
 import utilidades.BackupUtil;
+import restricoes.RestringirMenuPrincipal;
 
 
 /**
@@ -28,14 +29,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         //Necessário para que a mensagem apareça somente quando ESTA tela for aberta
         this.addWindowListener(new java.awt.event.WindowAdapter() {
+            
         @Override
         public void windowOpened(java.awt.event.WindowEvent e) {
+            
             if (!mostrarMensagem) {
                 verificarUsuario(); // mostra a mensagem apenas na primeira vez
                 mostrarMensagem = true;
             }
+            
         }
+        
     });
+        
     }
 
     /**
@@ -442,84 +448,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //Métodos usados
     
     /**
-     * Vai restringir o acesso aos botãos, dependendo do tipo de usuário
+     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
      */ 
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
+    
+        RestringirMenuPrincipal.restringirAtendente(cbxUsuarios, cbxJogos);
         
-        switch (usuarioLogado){
-            case "Atendente": //Atendente
-                
-                cbxUsuarios.setEnabled(false);
-                desabilitarOpcoes(cbxJogos, Set.of(1));
-                JOptionPane.showMessageDialog(this, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                  + "Para mudar isso, escolha o tipo de usuário (Gerente).");   
-            break;
-            
-            case "Estoquista":
-                
-               cbxClientes.setEnabled(false);
-               cbxEmprestimos.setEnabled(false);
-               cbxUsuarios.setEnabled(false);
-               cbxBackups.setEnabled(false);
-               JOptionPane.showMessageDialog(this, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                  + "Para mudar isso, escolha o tipo de usuário (Gerente).");
-               break;
-               
-            
-            case "Gerente":
-               break;
-            
-               
-            case "Supervisor":
-                
-                cbxUsuarios.setEnabled(false);
-                cbxBackups.setEnabled(false);
-                desabilitarOpcoes(cbxEmprestimos, Set.of(1)); // desabilita "Cadastrar emprestimos"
-                desabilitarOpcoes(cbxJogos, Set.of(1));    // desabilita "Cadastrar jogo"
-                desabilitarOpcoes(cbxClientes, Set.of(1)); // desabilita "Cadastrar cliente"
-                JOptionPane.showMessageDialog(this, "Acesso Restringido. Este tipo de usuário não terá acesso a todas as funções.\n" 
-                                                  + "Para mudar isso, escolha o tipo de usuário (Gerente).");
-                
-               break;
-        }
+        RestringirMenuPrincipal.restringirEstoquista(cbxUsuarios, cbxClientes, cbxEmprestimos, cbxBackups);
+        
+        RestringirMenuPrincipal.restringirSupervisor(cbxUsuarios, cbxClientes, cbxEmprestimos, cbxBackups, cbxJogos);
     }
-
-    
-
-    /**
-     * Desabilita botões do sistema, de acordo com o tipo de usuário que está conectado
-     * @param comboBox
-     * @param indicesDesabilitados
-     */ 
-    protected void desabilitarOpcoes(JComboBox<String> comboBox, Set<Integer> indicesDesabilitados) {
-    
-    // Customiza o renderizador para mostrar itens desabilitados, mas apenas visualmente
-    comboBox.setRenderer(new DefaultListCellRenderer() {
-        @Override
-        public Component getListCellRendererComponent(
-                JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if (indicesDesabilitados.contains(index)) {
-                c.setEnabled(false); 
-                c.setForeground(Color.GRAY); 
-            } else {
-                c.setEnabled(true);
-                c.setForeground(Color.BLACK);
-            }
-            return c;
-        }
-    });
-
-    // Impede a seleção de opções desabilitadas
-    comboBox.addActionListener(e -> {
-        if (indicesDesabilitados.contains(comboBox.getSelectedIndex())) {
-            JOptionPane.showMessageDialog(comboBox, "Acesso Negado a esta opção.");
-            comboBox.setSelectedIndex(0); // volta para "Selecione"
-        }
-    });
-}
 
 
     /**
@@ -544,4 +482,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnFechar.setMnemonic(KeyEvent.VK_F);
         
     }
+    
 }

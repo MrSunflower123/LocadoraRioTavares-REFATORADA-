@@ -22,7 +22,9 @@ public class BuscaEmprestimo extends javax.swing.JFrame {
         
         
         EmprestimoDAO empDAO = new EmprestimoDAO();
+        
         List<Emprestimo> listaEmp = empDAO.listar();
+        
         preencherTabela(listaEmp);
         
            
@@ -250,14 +252,23 @@ public class BuscaEmprestimo extends javax.swing.JFrame {
 
        
         for (Emprestimo emp: lista) {
+            
             modelo.addRow(new Object[]{
+                
                 emp.getId(),
+                
                 emp.getFkCliente(),
+                
                 emp.getFkJogo(),
+                
                 emp.getNomeCliente(),
+                
                 emp.getCpf(),
+                
                 emp.getTituloJogo(),
+                
                 emp.getDataEmp(),
+                
                 emp.getDevolucao(),
             });
         }
@@ -269,9 +280,13 @@ public class BuscaEmprestimo extends javax.swing.JFrame {
      * Preenche tblEmprestimos de acordo com o filtro selecionado
      */
      protected void aplicarFiltro(){
+         
          String texto = txtPesquisar.getText();
+         
          int filtro = cbxFiltros.getSelectedIndex();
+         
          EmprestimoDAO empDAO = new EmprestimoDAO();
+         
          List <Emprestimo> lista;
          
          if (texto.length() >= 1){
@@ -292,6 +307,7 @@ public class BuscaEmprestimo extends javax.swing.JFrame {
      * Abre o perfil do cliente selecionado com o mouse
      */ 
      protected void abrirPerfilEmprestimo(){
+         
          int linha = tblEmprestimos.getSelectedRow();
 
          if (linha == -1) {
@@ -304,9 +320,11 @@ public class BuscaEmprestimo extends javax.swing.JFrame {
          int idEmprestimo = (int) tblEmprestimos.getValueAt(linha, 0);
          
          EmprestimoDAO empDAO = new EmprestimoDAO();
+         
          Emprestimo empSelecionado = empDAO.buscarId(idEmprestimo);
          
          PerfilEmprestimo telaPerfil = new PerfilEmprestimo(empSelecionado);
+         
          telaPerfil.setVisible(true);
          
          //Fecha esta tela

@@ -1,11 +1,10 @@
-package view;
+  package view;
 
 import java.awt.event.KeyEvent;
 import model.Cliente;
 import dao.ClienteDAO;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import utilidades.GuardarUsuario;
+import restricoes.RestringirPerfilCliente;
 
 /**
  * JFrame mostra o perfil do cliente
@@ -400,10 +399,15 @@ public class PerfilCliente extends javax.swing.JFrame {
      * Preenche os campos automaticamente com os dados do cliente
      */
     protected void preencherCampos() {
+        
        txtNome.setText(clientePassado.getNome());
+       
        txtCpf.setText(clientePassado.getCpf());
+       
        txtBairro.setText(clientePassado.getBairro());
+       
        txtRua.setText(clientePassado.getRua());
+       
        txtResidencial.setText(String.valueOf(clientePassado.getResidencial()));
 
     //Deixa os campos bloqueados inicialmente
@@ -418,11 +422,17 @@ public class PerfilCliente extends javax.swing.JFrame {
      * Edita os dados do cliente pelos que estão nos campos
      */ 
     protected void atualizarCliente(){
+        
         ClienteDAO clienteDAO = new ClienteDAO();
+        
         String nome = txtNome.getText();
+        
         String cpf = txtCpf.getText();
+        
         String bairro = txtBairro.getText();
+        
         String rua = txtRua.getText();
+        
         int residencial = (Integer.parseInt(txtResidencial.getText()));
         
         clienteDAO.editar(clientePassado, nome, cpf, bairro, rua, residencial);
@@ -469,32 +479,11 @@ public class PerfilCliente extends javax.swing.JFrame {
      
      
     /**
-     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
+     * Limita os botões que o Supervisor pode acessar
      */ 
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
         
-        switch (usuarioLogado){
-            case "Atendente":
-                 //Sem restrições
-            break;
-            
-            case "Estoquista":
-               //Nem chega nesta tela
-               break;
-               
-            case "Gerente":
-                //Sem restrições
-               break;
-            
-               
-            case "Supervisor": 
-                 btnConfirmar.setEnabled(false);
-                 btnEditar.setEnabled(false);
-                 btnExcluir.setEnabled(false);
-               break;
-        }
+        RestringirPerfilCliente.restringirSupervisor(btnConfirmar, btnEditar, btnExcluir);
     }
 
     
@@ -503,9 +492,13 @@ public class PerfilCliente extends javax.swing.JFrame {
      * @throws java.lang.Exception
      */ 
     protected void validarCampos() throws Exception {
+        
         String nome = txtNome.getText();
+        
         String cpf = txtCpf.getText().trim();
+        
         String bairro = txtBairro.getText();
+        
         String rua = txtRua.getText();
         
         String residencialTexto = txtResidencial.getText().trim();
@@ -615,4 +608,6 @@ public class PerfilCliente extends javax.swing.JFrame {
         // Alt + X
         btnExcluir.setMnemonic(KeyEvent.VK_X);
     }
+    
+    
 }

@@ -6,8 +6,7 @@ import java.time.LocalDate;
 import model.Emprestimo;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
-import model.Usuario;
-import utilidades.GuardarUsuario;
+import restricoes.RestringirPerfilEmprestimo;
 
 /**
  * JFrame mostra o perfil do emprestimo
@@ -353,13 +352,18 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
 //Métodos usados
     
     protected void preencherCampos(){
+        
         // Cria um formatador no padrão brasileiro (dia/mês/ano)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
         txtNomeCliente.setText(empPassado.getNomeCliente());
+        
         txtCpf.setText(empPassado.getCpf());
+        
         txtNomeJogo.setText(empPassado.getTituloJogo());
+        
         txtDataEmp.setText(empPassado.getDataEmp().format(formatter));
+        
         txtDevolucao.setText(empPassado.getDevolucao().format(formatter));
     
         txtNomeCliente.setEditable(false);
@@ -369,12 +373,16 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
         txtDevolucao.setEditable(false);
     }
     
+    
     //Edita os dados do emprestimo de acordo com o que está nos campos
     private void atualizarEmprestimo(){
+        
         EmprestimoDAO empDAO = new EmprestimoDAO();
         
         String nome = txtNomeCliente.getText();
+        
         String cpf = txtCpf.getText();
+        
         String titulo = txtNomeJogo.getText();
         
         // Converte as strings dos campos para LocalDate
@@ -403,7 +411,9 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
      * Exclui o emprestimo da base de dados
      */
      protected void excluirEmprestimo(){
+         
          EmprestimoDAO empDAO = new EmprestimoDAO();
+         
          empDAO.excluir(empPassado.getId());
          
          JOptionPane.showMessageDialog(
@@ -416,32 +426,11 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
     
     
     /**
-     * Vai restringir o acesso aos botões, dependendo do tipo de usuário
+     * Limita os botões que o Supervisor pode acessar
      */ 
     protected void verificarUsuario(){
-        Usuario user = GuardarUsuario.getUsuario();
-        String usuarioLogado = user.getTipoUsuario();
         
-        switch (usuarioLogado){
-            case "Atendente":
-                 //Sem restrições
-            break;
-            
-            case "Estoquista":
-               //Nem chega nesta tela
-               break;
-               
-            case "Gerente":
-                //Sem restrições
-               break;
-            
-               
-            case "Supervisor": 
-                 btnConfirmar.setEnabled(false);
-                 btnEditar.setEnabled(false);
-                 btnExcluir.setEnabled(false);
-               break;
-        }
+        RestringirPerfilEmprestimo.restringirSupervisor(btnConfirmar, btnEditar, btnExcluir);
     }
 
     
@@ -450,10 +439,15 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
      * @throws java.lang.Exception
      */ 
     protected void validarCampos() throws Exception {
+        
         String nomeCliente = txtNomeCliente.getText();
+        
         String cpf = txtCpf.getText();
+        
         String nomeJogo = txtNomeJogo.getText();
+        
         String dataEmpTexto = txtDataEmp.getText().trim();
+        
         String devolucaoTexto = txtDevolucao.getText().trim();
         
        
@@ -564,4 +558,5 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
         btnVoltar.setMnemonic(KeyEvent.VK_V);
         
     }
+    
 }

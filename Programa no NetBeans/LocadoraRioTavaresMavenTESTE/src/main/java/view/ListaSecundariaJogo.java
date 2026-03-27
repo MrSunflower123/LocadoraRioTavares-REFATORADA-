@@ -217,7 +217,9 @@ public class ListaSecundariaJogo extends javax.swing.JFrame {
 
 
             for (Jogo j : lista) {
+                
                 modelo.addRow(new Object[]{
+                    
                     j.getId(),
                     j.getTitulo(),
                     j.getGenero(),
@@ -225,7 +227,9 @@ public class ListaSecundariaJogo extends javax.swing.JFrame {
                     j.getLancamento(),
                     j.getDesenvolvedora(),
                     j.getCopias()
+                        
                 });
+                
             }
         }
     

@@ -21,11 +21,15 @@ public class ClienteDAO {
             EntityManager em = JPAUtil.getEntityManager();
 
             try{
+                
                 em.getTransaction().begin();
                 em.persist(cliente);
-                em.getTransaction().commit();           
+                em.getTransaction().commit(); 
+                
             } catch(Exception e) {
+                
                 em.getTransaction().rollback();
+                
                 throw e;
             }
 
@@ -44,6 +48,7 @@ public class ClienteDAO {
           EntityManager em = JPAUtil.getEntityManager();
           
           try{
+              
               TypedQuery<Cliente> consulta = em.createQuery("SELECT c FROM EntidadeCliente c", Cliente.class);
               List<Cliente> listaCliente = consulta.getResultList();
               return listaCliente;
@@ -84,7 +89,9 @@ public class ClienteDAO {
           }
           
           TypedQuery<Cliente> consulta = em.createQuery(jpql, Cliente.class);
-          consulta.setParameter("parametro", "%" + texto + "%");        
+          
+          consulta.setParameter("parametro", "%" + texto + "%");     
+          
           List<Cliente> listaCliente = consulta.getResultList();
           
           return listaCliente;
@@ -105,9 +112,12 @@ public class ClienteDAO {
           EntityManager em = JPAUtil.getEntityManager();
           
           try{
+              
               Cliente c = em.find(Cliente.class, id);
               return c;
+              
           }
+          
           finally{
                  JPAUtil.closeEntityManager();
           }
@@ -134,10 +144,15 @@ public class ClienteDAO {
               Cliente c = em.find(Cliente.class, selecionado.getId());
               
               if (c != null){
+                  
                   c.setNome(nome);
+                  
                   c.setCpf(cpf);
+                  
                   c.setBairro(bairro);
+                  
                   c.setRua(rua);
+                  
                   c.setResidencial(residencial);
                   
                   em.merge(c);
@@ -145,8 +160,11 @@ public class ClienteDAO {
               
               em.getTransaction().commit();
           }
+          
           catch (Exception e) {
+              
           em.getTransaction().rollback();
+          
           throw e;
           }
           
@@ -181,10 +199,13 @@ public class ClienteDAO {
 
                 em.getTransaction().commit();
             }
+            
             catch (Exception e) {
                 em.getTransaction().rollback();
                 throw e;
+                
             }
+            
             finally {
                 JPAUtil.closeEntityManager();
             }

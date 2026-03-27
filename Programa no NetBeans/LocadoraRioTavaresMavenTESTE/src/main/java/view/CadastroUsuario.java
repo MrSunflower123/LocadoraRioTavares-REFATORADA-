@@ -227,10 +227,13 @@ public class CadastroUsuario extends javax.swing.JFrame {
      * Criptografa a senha.
      */
     protected void cadastrarUsuario(){
+        
         Usuario objUsuario = new Usuario();
         
         String nome = txtNomeUsuario.getText();
+        
         String senha = txtSenha.getText();
+        
         String tipoSelecionado = cbxTipoUsuario.getSelectedItem().toString();
         
         String senhaCripto = getMD5(senha);
@@ -239,6 +242,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
         objUsuario.setNomeUsuario(nome);
         objUsuario.setSenha(senhaCripto);
         objUsuario.setTipoUsuario(tipoSelecionado);
+        
         
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         usuarioDAO.inserir(objUsuario);
@@ -261,7 +265,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
     protected void validarCampos() throws Exception {
         
         String nomeUsuario = txtNomeUsuario.getText();
+        
         String senha = txtSenha.getText();
+        
         String tipo = cbxTipoUsuario.getSelectedItem().toString();
         
         
@@ -301,4 +307,5 @@ public class CadastroUsuario extends javax.swing.JFrame {
         btnVoltar.setMnemonic(KeyEvent.VK_V);
         
     }
+    
 }

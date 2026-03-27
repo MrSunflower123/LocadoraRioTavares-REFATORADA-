@@ -31,6 +31,7 @@ public class EmprestimoVinculado extends javax.swing.JFrame {
         // Preenche a lista com os emprestimos vinculados
         listarEmprestimos();
         
+        
         //Esconde a coluna de ID, ID_cliente e ID_jogo
         tblEmprestimos.getColumnModel().getColumn(0).setMinWidth(0);
         tblEmprestimos.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -221,7 +222,9 @@ public class EmprestimoVinculado extends javax.swing.JFrame {
 
        
         for (Emprestimo emp: lista) {
+            
             modelo.addRow(new Object[]{
+                
                 emp.getId(),
                 emp.getFkCliente(),
                 emp.getFkJogo(),
@@ -230,8 +233,11 @@ public class EmprestimoVinculado extends javax.swing.JFrame {
                 emp.getTituloJogo(),
                 emp.getDataEmp(),
                 emp.getDevolucao(),
+                
             });
+            
         }
+        
     }
 
     
@@ -239,9 +245,13 @@ public class EmprestimoVinculado extends javax.swing.JFrame {
      * Preenche tblEmprestimos de acordo com o filtro selecionado
      */
      protected void aplicarFiltro(){
+         
          String texto = txtPesquisar.getText();
+         
          int filtro = cbxFiltros.getSelectedIndex();
+         
          EmprestimoDAO empDAO = new EmprestimoDAO();
+         
          List <Emprestimo> lista;
          
          if (texto.length() >= 1){
@@ -262,9 +272,11 @@ public class EmprestimoVinculado extends javax.swing.JFrame {
       * Mostra os emprestimo feitos pelo CPF digitado
       */
      protected void listarEmprestimos(){
+         
          String cpf = clientePassado.getCpf();
          
          cbxFiltros.setSelectedIndex(2);
+         
          txtPesquisar.setText(cpf);
          
          
