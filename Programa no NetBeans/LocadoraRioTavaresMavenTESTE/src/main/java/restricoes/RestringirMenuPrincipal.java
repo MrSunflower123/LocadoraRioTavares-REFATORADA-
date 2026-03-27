@@ -102,27 +102,38 @@ public class RestringirMenuPrincipal {
     
         // Customiza o renderizador para mostrar itens desabilitados, mas apenas visualmente
         comboBox.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(
-                    JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            
+        @Override
+        public Component getListCellRendererComponent(
+                JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                
                 Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                
                 if (indicesDesabilitados.contains(index)) {
                     component.setEnabled(false); 
-                    component.setForeground(Color.GRAY); 
+                    component.setForeground(Color.GRAY);
+                    
                 } else {
+                    
                     component.setEnabled(true);
                     component.setForeground(Color.BLACK);
+                    
                 }
+                
                 return component;
             }
         });
 
         // Impede a seleção de opções desabilitadas
         comboBox.addActionListener(e -> {
+            
             if (indicesDesabilitados.contains(comboBox.getSelectedIndex())) {
+                
                 JOptionPane.showMessageDialog(comboBox, "Acesso Negado a esta opção.");
                 comboBox.setSelectedIndex(0); // volta para "Selecione"
+                
             }
+            
         });
     }
      

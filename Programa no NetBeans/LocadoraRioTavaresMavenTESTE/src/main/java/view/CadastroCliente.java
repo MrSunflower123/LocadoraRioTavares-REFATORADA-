@@ -13,7 +13,6 @@ public class CadastroCliente extends javax.swing.JFrame {
 
    
     
-
     public CadastroCliente() {
        
         initComponents();
@@ -294,20 +293,30 @@ public class CadastroCliente extends javax.swing.JFrame {
      * Cadastra um novo cliente na tabela "clientes"
      */
     protected void cadastrarCliente(){
+        
         Cliente objCliente = new Cliente();
         
         String nome = txtNome.getText();
+        
         String cpf = txtCpf.getText();
+        
         String bairro = txtBairro.getText();
+        
         String rua = txtRua.getText();
+        
         int residencial = Integer.parseInt(txtResidencial.getText());
         
         
         objCliente.setNome(nome);
+        
         objCliente.setCpf(cpf);
+        
         objCliente.setBairro(bairro);
+        
         objCliente.setRua(rua);
+        
         objCliente.setResidencial(residencial);
+        
         
         ClienteDAO clienteDAO = new ClienteDAO();
         clienteDAO.inserir(objCliente);
@@ -327,9 +336,13 @@ public class CadastroCliente extends javax.swing.JFrame {
      * Garante que os campos não estejam vazios e no formato correto
      */
     protected void validarCampos() throws Exception {
+        
         String nome = txtNome.getText();
+        
         String cpf = txtCpf.getText().trim();
+        
         String bairro = txtBairro.getText();
+        
         String rua = txtRua.getText();
         
         String residencialTexto = txtResidencial.getText().trim();
@@ -431,4 +444,5 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnVoltar.setMnemonic(KeyEvent.VK_V);
         
     }
+    
 }

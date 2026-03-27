@@ -241,7 +241,9 @@ public class TelaDeLogin extends javax.swing.JFrame {
     protected void autenticarUsuario (){
         
         String usuarioDigitado = txtNomeUsuario.getText();
+        
         String senhaDigitada = txtSenha.getText();
+        
         String tipoUsuario = cbxTipoUsuario.getSelectedItem().toString();
         
         AutenticarLogin.autenticarUsuario(usuarioDigitado, senhaDigitada, tipoUsuario);  
@@ -252,8 +254,11 @@ public class TelaDeLogin extends javax.swing.JFrame {
      * 
      */
     protected void verificarUsuario(){
+        
         Usuario user = GuardarUsuario.getUsuario();
+        
         String usuarioLogado = user.getTipoUsuario();
+        
         String nome = user.getNomeUsuario();
         
         AutenticarLogin.verificarTipo(user, usuarioLogado, nome);
@@ -266,7 +271,9 @@ public class TelaDeLogin extends javax.swing.JFrame {
     protected void validarCampos() throws Exception {
         
         String nomeUsuario = txtNomeUsuario.getText();
+        
         String senha = txtSenha.getText();
+        
         String tipo = cbxTipoUsuario.getSelectedItem().toString();
         
         
@@ -303,4 +310,5 @@ public class TelaDeLogin extends javax.swing.JFrame {
         btnEntrar.setMnemonic(KeyEvent.VK_E);
         
     }
+    
 }

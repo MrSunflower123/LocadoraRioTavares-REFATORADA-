@@ -30,14 +30,16 @@ public class Emprestimo {
     @ManyToOne
     @JoinColumn(
     name = "id_cliente",
-    foreignKey = @ForeignKey(name = "fk_id_cliente"))                     
+    foreignKey = @ForeignKey(name = "fk_id_cliente"))
+    
     private Cliente fkCliente;
     
     // Chave estrangeira, chave primária de EntidadeJogo
     @ManyToOne
     @JoinColumn(
     name = "id_jogo",
-    foreignKey = @ForeignKey(name = "fk_id_jogo"))  
+    foreignKey = @ForeignKey(name = "fk_id_jogo")) 
+    
     private Jogo fkJogo;
     
     

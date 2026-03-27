@@ -29,14 +29,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         //Necessário para que a mensagem apareça somente quando ESTA tela for aberta
         this.addWindowListener(new java.awt.event.WindowAdapter() {
+            
         @Override
         public void windowOpened(java.awt.event.WindowEvent e) {
+            
             if (!mostrarMensagem) {
                 verificarUsuario(); // mostra a mensagem apenas na primeira vez
                 mostrarMensagem = true;
             }
+            
         }
+        
     });
+        
     }
 
     /**
@@ -477,4 +482,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnFechar.setMnemonic(KeyEvent.VK_F);
         
     }
+    
 }

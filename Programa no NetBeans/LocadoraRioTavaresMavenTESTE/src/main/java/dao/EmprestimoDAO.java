@@ -23,12 +23,18 @@ public class EmprestimoDAO {
             EntityManager em = JPAUtil.getEntityManager();
 
             try{
+                
                 em.getTransaction().begin();
                 em.persist(emp);
-                em.getTransaction().commit();           
-            } catch(Exception e) {
+                em.getTransaction().commit(); 
+                
+            }
+            
+            catch(Exception e) {
+                
                 em.getTransaction().rollback();
-                throw e;
+                
+                throw e; 
             }
 
             finally {
@@ -46,6 +52,7 @@ public class EmprestimoDAO {
           EntityManager em = JPAUtil.getEntityManager();
           
           try{
+              
               TypedQuery<Emprestimo> consulta = em.createQuery("SELECT e FROM EntidadeEmprestimo e", Emprestimo.class);
               List<Emprestimo> listaEmprestimo = consulta.getResultList();
               return listaEmprestimo;
@@ -135,10 +142,15 @@ public class EmprestimoDAO {
               Emprestimo emp = em.find(Emprestimo.class, selecionado.getId());
               
               if (emp != null){
+                  
                   emp.setNomeCliente(nome);
+                  
                   emp.setCpf(cpf);
+                  
                   emp.setTituloJogo(titulo);
+                  
                   emp.setDataEmp(dataEmp);
+                  
                   emp.setDevolucao(devolucao);
                   
                   em.merge(emp);
@@ -146,9 +158,11 @@ public class EmprestimoDAO {
               
               em.getTransaction().commit();
           }
+          
           catch (Exception e) {
           em.getTransaction().rollback();
           throw e;
+          
           }
           
           finally {
@@ -175,13 +189,18 @@ public class EmprestimoDAO {
 
                 em.getTransaction().commit();
             }
+            
             catch (Exception e) {
+                
                 em.getTransaction().rollback();
+                
                 throw e;
             }
+            
             finally {
                 JPAUtil.closeEntityManager();
             }
+            
         }
 }
 

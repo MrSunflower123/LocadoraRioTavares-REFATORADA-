@@ -352,13 +352,18 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
 //Métodos usados
     
     protected void preencherCampos(){
+        
         // Cria um formatador no padrão brasileiro (dia/mês/ano)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
         txtNomeCliente.setText(empPassado.getNomeCliente());
+        
         txtCpf.setText(empPassado.getCpf());
+        
         txtNomeJogo.setText(empPassado.getTituloJogo());
+        
         txtDataEmp.setText(empPassado.getDataEmp().format(formatter));
+        
         txtDevolucao.setText(empPassado.getDevolucao().format(formatter));
     
         txtNomeCliente.setEditable(false);
@@ -368,12 +373,16 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
         txtDevolucao.setEditable(false);
     }
     
+    
     //Edita os dados do emprestimo de acordo com o que está nos campos
     private void atualizarEmprestimo(){
+        
         EmprestimoDAO empDAO = new EmprestimoDAO();
         
         String nome = txtNomeCliente.getText();
+        
         String cpf = txtCpf.getText();
+        
         String titulo = txtNomeJogo.getText();
         
         // Converte as strings dos campos para LocalDate
@@ -402,7 +411,9 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
      * Exclui o emprestimo da base de dados
      */
      protected void excluirEmprestimo(){
+         
          EmprestimoDAO empDAO = new EmprestimoDAO();
+         
          empDAO.excluir(empPassado.getId());
          
          JOptionPane.showMessageDialog(
@@ -428,10 +439,15 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
      * @throws java.lang.Exception
      */ 
     protected void validarCampos() throws Exception {
+        
         String nomeCliente = txtNomeCliente.getText();
+        
         String cpf = txtCpf.getText();
+        
         String nomeJogo = txtNomeJogo.getText();
+        
         String dataEmpTexto = txtDataEmp.getText().trim();
+        
         String devolucaoTexto = txtDevolucao.getText().trim();
         
        
@@ -542,4 +558,5 @@ public class PerfilEmprestimo extends javax.swing.JFrame {
         btnVoltar.setMnemonic(KeyEvent.VK_V);
         
     }
+    
 }

@@ -21,7 +21,9 @@ public class BuscaJogo extends javax.swing.JFrame {
         mapearTeclas();
         
         JogoDAO jogoDAO = new JogoDAO();
+        
         List<Jogo> listaJogo = jogoDAO.listar();
+        
         preencherTabela(listaJogo);
         
     
@@ -239,13 +241,21 @@ public class BuscaJogo extends javax.swing.JFrame {
 
 
             for (Jogo j : lista) {
+                
                 modelo.addRow(new Object[]{
+                    
                     j.getId(),
+                    
                     j.getTitulo(),
+                    
                     j.getGenero(),
+                    
                     j.getPlataforma(),
+                    
                     j.getLancamento(),
+                    
                     j.getDesenvolvedora(),
+                    
                     j.getCopias()
                 });
             }
@@ -255,9 +265,13 @@ public class BuscaJogo extends javax.swing.JFrame {
      * Preenche tblJogos de acordo com o filtro selecionado
      */
      protected void aplicarFiltro(){
+         
          String texto = txtPesquisar.getText();
+         
          int filtro = cbxFiltros.getSelectedIndex();
+         
          JogoDAO jogoDAO = new JogoDAO();
+         
          List <Jogo> lista;
 
          if (texto.length() >= 1){
@@ -277,6 +291,7 @@ public class BuscaJogo extends javax.swing.JFrame {
      * Abre o perfil do jogo selecionado com o mouse
      */ 
      protected void abrirPerfil(){
+         
          int linha = tblJogos.getSelectedRow();
 
          if (linha == -1) {
@@ -287,9 +302,11 @@ public class BuscaJogo extends javax.swing.JFrame {
          int idJogo = (int) tblJogos.getValueAt(linha, 0);
 
          JogoDAO jogoDAO = new JogoDAO();
+         
          Jogo jogoSelecionado = jogoDAO.buscarId(idJogo);
 
          PerfilJogo telaPerfil = new PerfilJogo(jogoSelecionado);
+         
          telaPerfil.setVisible(true);
          
          //Fecha essa tela
@@ -313,7 +330,9 @@ public class BuscaJogo extends javax.swing.JFrame {
         
         // Alt + V
         btnVoltar.setMnemonic(KeyEvent.VK_V);  
-    }   
+    } 
+    
+    
 }
 
 

@@ -19,6 +19,7 @@ public class AutenticarLogin {
      * @param tipoUsuario
      */
     public static void autenticarUsuario (String usuario, String senha, String tipoUsuario){
+        
         UsuarioDAO dao = new UsuarioDAO();
         
         Usuario user = dao.autenticar(usuario, senha, tipoUsuario);

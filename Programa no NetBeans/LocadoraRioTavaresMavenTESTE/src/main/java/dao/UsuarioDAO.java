@@ -67,8 +67,10 @@ public class UsuarioDAO {
           EntityManager em = JPAUtil.getEntityManager();
           
           try{
+              
               Usuario u = em.find(Usuario.class, id);
               return u;
+              
           }
           finally{
                  JPAUtil.closeEntityManager();
@@ -129,8 +131,11 @@ public class UsuarioDAO {
               Usuario u = em.find(Usuario.class, selecionado.getId());
               
               if (u != null){
+                  
                   u.setNomeUsuario(nome);
+                  
                   u.setSenha(senha);
+                  
                   u.setTipoUsuario(tipoUsuario);
                   
                   em.merge(u);
@@ -138,14 +143,19 @@ public class UsuarioDAO {
               
               em.getTransaction().commit();
           }
+          
           catch (Exception e) {
+              
           em.getTransaction().rollback();
+          
           throw e;
+          
           }
           
           finally {
             JPAUtil.closeEntityManager(); 
           }
+          
       }
       
       
@@ -167,13 +177,18 @@ public class UsuarioDAO {
 
                 em.getTransaction().commit();
             }
+            
             catch (Exception e) {
+                
                 em.getTransaction().rollback();
+                
                 throw e;
             }
+            
             finally {
                 JPAUtil.closeEntityManager();
             }
+            
         }
     
         
@@ -200,7 +215,9 @@ public class UsuarioDAO {
                
                return consulta.getSingleResult();
                
-           } catch (NoResultException e){
+           } 
+           
+           catch (NoResultException e){
                JOptionPane.showMessageDialog(null, "O Usuário, Senha ou o Tipo estão incorretos!");
                return null;
            }
@@ -208,5 +225,7 @@ public class UsuarioDAO {
            finally {
             JPAUtil.closeEntityManager();
         }
+           
     }
+    
 }

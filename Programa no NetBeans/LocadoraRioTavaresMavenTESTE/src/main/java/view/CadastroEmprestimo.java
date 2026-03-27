@@ -9,7 +9,6 @@ import model.Emprestimo;
 import model.Jogo;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import utilidades.GuardarUsuario;
 
 /**
  * JFrame usada para cadastrar um novo emprestimo
@@ -26,8 +25,11 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         mapearTeclas();
         
         
-        // Clicar no campo "Nome" ou "CPF" abre uma lista secundaria de clientes
+        /**
+        * Clicar no campo "Nome" ou "CPF" abre uma lista secundaria de clientes
+        */ 
         txtNomeCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            
         @Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
         SwingUtilities.invokeLater(() -> {
@@ -39,9 +41,11 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                 
             //Preeenche os campos "Nome do cliente" e "Cpf"   
             txtNomeCliente.setText(cliente.getNome());
+            
             txtCpf.setText(cliente.getCpf());
             
             });
+            
             tela.setVisible(true);
             JOptionPane.showMessageDialog(null,
                
@@ -51,11 +55,13 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE
             );
         });
+        
         }
         
     });
         
         txtCpf.addMouseListener(new java.awt.event.MouseAdapter() {
+            
         @Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
         SwingUtilities.invokeLater(() -> {
@@ -67,6 +73,7 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
                 
             //Preeenche os campos "Nome do cliente" e "Cpf"   
             txtNomeCliente.setText(cliente.getNome());
+            
             txtCpf.setText(cliente.getCpf());
             
             });
@@ -83,8 +90,11 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
     });
     
     
-        // Clicar no campo "Nome Jogo" abre uma lista secundaria de jogos
+        /** 
+         * Clicar no campo "Nome Jogo" abre uma lista secundaria de jogos
+         */
         txtNomeJogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            
         @Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
         SwingUtilities.invokeLater(() -> {
@@ -109,7 +119,9 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
             );
         });
         }
+        
     });
+        
     }
 
     /**
@@ -368,11 +380,16 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         Emprestimo objEmprestimo = new Emprestimo();
         
         String nome = txtNomeCliente.getText();
+        
         String cpf = txtCpf.getText();
+        
         String nomeJogo = txtNomeJogo.getText();
         
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
         LocalDate dataEmp = LocalDate.parse(txtDataEmprestimo.getText(), formatter);
+        
         LocalDate devolucao = LocalDate.parse(txtDevolucao.getText(), formatter);
 
         
@@ -402,10 +419,15 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
     
     //Valida se os campos não estão vazios e no formato correto
     private void validarCampos() throws Exception {
+        
         String nomeCliente = txtNomeCliente.getText();
+        
         String cpf = txtCpf.getText();
+        
         String nomeJogo = txtNomeJogo.getText();
+        
         String dataEmpTexto = txtDataEmprestimo.getText().trim();
+        
         String devolucaoTexto = txtDevolucao.getText().trim();
         
        
@@ -446,6 +468,7 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         
         //Data de empréstimo precisa existir no calendário
         try {
+            
         LocalDate.parse(dataEmpTexto, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }catch (Exception e) {
         throw new Exception("Data de empréstimo inexistente no calendário");
@@ -465,11 +488,13 @@ public class CadastroEmprestimo extends javax.swing.JFrame {
         
         //Data devolução precisa existir no calendário
         try {
+            
         LocalDate.parse(devolucaoTexto, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (Exception e) {
         throw new Exception("Data de devolução inexistente no calendário.");
         }
-        }
+        
+    }
     
     
     // Mapeia os atalhos para a tela
