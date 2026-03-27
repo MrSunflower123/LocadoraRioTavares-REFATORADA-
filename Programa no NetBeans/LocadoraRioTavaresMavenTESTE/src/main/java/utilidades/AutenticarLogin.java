@@ -40,29 +40,29 @@ public class AutenticarLogin {
     /**
      * Verifica o tipo de usuário que está se conectando no sistema
      * 
-     * @param user
-     * @param usuarioLogado
-     * @param nome
+     * @param tipo
+     * @param nomeUsuario
      */
-    public static void verificarTipo(Usuario user, String usuarioLogado,  String nome ){
+    public static void verificarTipo(String tipo, String nomeUsuario){
         
+        TipoUsuarioEnum tipoUsuario = TipoUsuarioEnum.valueOf(tipo.toUpperCase());
         
         // Determina que tipo usuário está tentando se conectar
-        switch (usuarioLogado){
+        switch (tipoUsuario){
             
-            case "Gerente":
+            case GERENTE:
             ConectarBD.criarConexao("Gerente", "54321");
             break;
             
-            case "Atendente":
+            case ATENDENTE:
             ConectarBD.criarConexao("Atendente", "12345");
             break;
             
-            case "Supervisor":
+            case SUPERVISOR:
             ConectarBD.criarConexao("Supervisor", "56789");
             break;
             
-            case "Estoquista":
+            case ESTOQUISTA:
             ConectarBD.criarConexao("Estoquista", "98765");
             break;
 
@@ -72,7 +72,7 @@ public class AutenticarLogin {
             break;
         }
         
-        JOptionPane.showMessageDialog(null, "Olá, " + nome + ", seu tipo de usuário é: " + usuarioLogado +
+        JOptionPane.showMessageDialog(null, "Olá, " + nomeUsuario + ", seu tipo de usuário é: " + tipo +
                                       ". Seja bem-vindo!" );
     }
     

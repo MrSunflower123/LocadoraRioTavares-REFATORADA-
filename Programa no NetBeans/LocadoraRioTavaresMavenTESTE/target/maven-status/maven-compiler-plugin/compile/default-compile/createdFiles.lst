@@ -14,6 +14,7 @@ view\CadastroCliente.class
 dao\JPAUtil.class
 view\EmprestimoVinculado.class
 view\PerfilUsuario$4.class
+utilidades\AutenticarLogin$1.class
 view\CadastroJogo$2.class
 view\BuscaCliente$3.class
 view\PerfilCliente$2.class

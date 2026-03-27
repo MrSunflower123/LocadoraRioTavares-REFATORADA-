@@ -255,13 +255,14 @@ public class TelaDeLogin extends javax.swing.JFrame {
      */
     protected void verificarUsuario(){
         
-        Usuario user = GuardarUsuario.getUsuario();
+        // Guarda em uma variável global
+        Usuario usuarioLogado = GuardarUsuario.getUsuario();
         
-        String usuarioLogado = user.getTipoUsuario();
+        String tipoUsuario = usuarioLogado.getTipoUsuario();
         
-        String nome = user.getNomeUsuario();
+        String nomeUsuario = usuarioLogado.getNomeUsuario();
         
-        AutenticarLogin.verificarTipo(user, usuarioLogado, nome);
+        AutenticarLogin.verificarTipo(tipoUsuario, nomeUsuario);
     }
     
     
