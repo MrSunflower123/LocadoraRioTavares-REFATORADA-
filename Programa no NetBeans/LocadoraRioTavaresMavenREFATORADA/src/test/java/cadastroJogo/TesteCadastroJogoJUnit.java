@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
+ */
 package cadastroJogo;
 
 import org.junit.jupiter.api.AfterEach;
@@ -34,7 +37,6 @@ public class TesteCadastroJogoJUnit {
     public void tearDown() {
     }
 
-    
     // Verificando se há um campo vazio
     // Deve lançar uma exceção se um dos campos estiver vazio
     // Uma exceção é lançada com uma mensagem específica para aquele campo
@@ -80,8 +82,8 @@ public class TesteCadastroJogoJUnit {
        assertTrue(true);
            
     }// fecha teste
-            
-            
+    
+    
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
